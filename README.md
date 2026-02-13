@@ -37,4 +37,18 @@ The goal is to maximize hardware throughput (CPU/GPU) by implementing **SIMD (AV
   - Implemented Loop Unrolling to reduce branch prediction overhead.
 - **Result:** Demonstrated significant performance gain over scalar implementation.
 
+### 4. Kernel Fusion Demo (CUDA) [Notebook: `Kernel_Fusion_Demo.ipynb`]
+**Topic:** Reducing launch overhead & global-memory traffic with kernel fusion
+- **Problem:** A sequence like `Scale -> Bias Add -> ReLU` runs as multiple kernels, causing repeated global-memory read/write and extra kernel launch overhead.
+- **Optimization Strategy:**
+  - Keep the baseline as **3 kernels** (`scale_kernel`, `bias_kernel`, `relu_kernel`).
+  - Add a **fused kernel** (`fused_scale_bias_relu_kernel`) that computes the full expression in one pass.
+  - Benchmark both versions with CUDA events and check correctness against CPU reference.
+- **How to run (Colab):**
+  - Open `Kernel_Fusion_Demo.ipynb` in Colab.
+  - Set **Runtime -> Change runtime type -> GPU**.
+  - Run all cells to compile and benchmark.
+- **Standalone file:**
+  - The same CUDA source is also available in `kernel_fusion_demo.cu`.
+
 ---

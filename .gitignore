@@ -1,0 +1,30 @@
+# Build outputs
+build/
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+
+# Local toolchains and downloaded installers
+tools/
+*.msi
+*.zip
+*.7z
+python-*-amd64.exe
+
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Profiling artifacts
+*.qdrep
+*.nsys-rep
+*.sqlite
+
+# Local notes that are not part of the public experiment repo
+*interview*
+*면담*
+sslab_interview_prep_*.md

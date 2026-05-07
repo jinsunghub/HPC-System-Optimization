@@ -2,7 +2,6 @@
 
 ## Environment
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
 - GPU memory: 2048 MiB
 - Driver: 595.97
@@ -76,23 +75,4 @@ The key CUDA lesson:
 ```text
 GPUs shine when there is enough parallel computation per byte moved.
 ```
-
-## Caveat
-
-This benchmark compares naive CPU code with a naive CUDA kernel. A production
-CPU implementation using BLAS, SIMD, cache blocking, and multithreading would be
-much faster than this CPU baseline. Likewise, optimized GPU libraries such as
-cuBLAS would be much faster than this naive CUDA kernel.
-
-The benchmark is still useful because it shows why workload shape matters:
-
-- vector add: memory-transfer dominated
-- repeated vector add: data reuse matters
-- matrix multiplication: compute intensity makes GPU acceleration obvious
-
-## Next Experiments
-
-- Implement tiled matrix multiplication using shared memory.
-- Compare naive CUDA matmul with tiled CUDA matmul.
-- Later, compare both against cuBLAS if the needed library package is added.
 

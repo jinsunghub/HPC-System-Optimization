@@ -2,7 +2,6 @@
 
 ## Run
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
 - Result CSV: `results/shared_bank_conflict_20260504_223521.csv`
 - Plot: `results/shared_bank_conflict_20260504_223521.png`
@@ -56,8 +55,4 @@ The padded cases use `effective_stride = requested_stride + 1`, for example 32 b
 - The 32-way conflict case was about 18.0x slower than the stride-1 conflict-free baseline.
 - Padding the access pattern recovered most of the lost performance. For requested stride 32, padding changed effective stride 32 to 33 and improved runtime from 21.79 ms to 0.91 ms.
 - This is the same layout idea used in real tiled kernels: a small padding column can avoid bank conflicts when reading transposed or strided shared-memory data.
-
-## Short explanation
-
-I implemented a shared-memory bank conflict benchmark that maps warp lanes to shared-memory addresses with different strides. A stride of 1 gave conflict-free access, while power-of-two strides caused 2-way through 32-way bank conflicts. The 32-way conflict case was about 18x slower than the conflict-free baseline. Adding one element of padding changed the effective stride from 32 to 33 and recovered the runtime to about 0.91 ms. This shows that shared memory is not automatically fast; its layout has to avoid bank conflicts.
 

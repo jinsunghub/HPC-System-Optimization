@@ -2,9 +2,7 @@
 
 ## Run
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
-- Result: `results/reduction_20260504_021529.csv`
 - Input size: 4,194,304 floats
 - Kernel repeat: 5
 - Block size: 256
@@ -39,8 +37,4 @@ Four methods were compared:
 - All GPU methods reported theoretical occupancy 1.00, but their performance differed dramatically.
 
 This is the key lesson: reductions are not just "parallel loops." A good reduction reduces contention, uses block-local aggregation, and minimizes synchronization and global memory traffic.
-
-## Short explanation
-
-I implemented a parallel reduction benchmark with a global atomic baseline, a shared memory block reduction, and a warp shuffle reduction. The global atomic version serialized many updates to one memory location and took about 9.45 ms. The optimized reductions first aggregated values inside each block and then reduced partial sums, bringing the runtime down to about 0.34 ms. This was roughly 27x faster than the atomic baseline while preserving exact correctness for the test input.
 

@@ -2,7 +2,6 @@
 
 ## Environment
 
-- Date: 2026-05-03
 - GPU: NVIDIA GeForce MX450
 - GPU memory: 2048 MiB
 - Driver: 595.97
@@ -48,10 +47,4 @@ program look fast, while end-to-end time can tell a very different story.
 The block-size sweep tested 128, 256, and 512 threads per block. Kernel time
 changed a little, but the overall conclusion did not change. The main bottleneck
 is not block size. The main bottleneck is host-device data movement.
-
-Next experiments should either:
-
-- keep data on the GPU across repeated operations
-- use pinned host memory
-- move to a higher arithmetic-intensity kernel such as matrix multiplication
 

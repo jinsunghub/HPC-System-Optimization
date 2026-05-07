@@ -2,7 +2,6 @@
 
 ## Environment
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
 - GPU memory: 2048 MiB
 - Driver: 595.97

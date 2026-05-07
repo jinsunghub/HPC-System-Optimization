@@ -2,7 +2,6 @@
 
 ## Run
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
 - Result CSV: `results/stream_overlap_sweep_20260504_220159.csv`
 - Plot: `results/stream_overlap_sweep_20260504_220159.png`

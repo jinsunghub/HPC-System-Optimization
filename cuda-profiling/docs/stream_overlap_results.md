@@ -2,9 +2,7 @@
 
 ## Run
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
-- Result: `results/stream_overlap_20260504_214528.csv`
 - Input size: 16,777,216 floats
 - Total input size: 64 MB
 - Total host-device transfer per run: 128 MB
@@ -48,8 +46,4 @@ The goal is to test whether H2D copy, kernel execution, and D2H copy can be pipe
 The GPU reported two async copy engines, so overlapping transfer and compute is possible. The result shows that stream pipelining can hide part of the host-device transfer cost.
 
 The `effective_transfer_gb_s` value is not pure PCIe bandwidth. It is an end-to-end pipeline metric using total H2D+D2H bytes divided by total elapsed time, so it includes kernel work.
-
-## Short explanation
-
-I implemented a CUDA stream overlap benchmark that splits a vector workload into chunks and compares sequential execution against pinned-memory multi-stream execution. The sequential baseline performed H2D copy, kernel, and D2H copy one chunk at a time. With pinned memory and four CUDA streams, the same workload improved from about 53.76 ms to 27.64 ms, roughly a 1.95x speedup. This showed that optimizing a GPU program is not only about making kernels faster; overlapping data transfer and compute can also improve end-to-end throughput.
 

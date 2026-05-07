@@ -2,7 +2,6 @@
 
 ## Environment
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
 - GPU memory: 2048 MiB
 - Driver: 595.97
@@ -74,21 +73,4 @@ Shared memory helps when many threads reuse the same data.
 This is the first real GPU memory hierarchy optimization in the lab. The earlier
 experiments focused on host-device transfer. This one focuses on memory traffic
 inside the GPU.
-
-## Caveat
-
-This is still a learning kernel. It does not use register tiling, vectorized
-loads, loop unrolling, Tensor Cores, or cuBLAS. A production GEMM implementation
-would be much faster.
-
-The important result is not that this kernel is optimal. The important result is
-that shared-memory data reuse improved the naive CUDA kernel by about 2x on the
-largest tested matrix.
-
-## Next Experiments
-
-- Profile naive vs tiled with Nsight Systems.
-- Add `cudaMemcpyAsync` with pinned memory to overlap transfer and compute.
-- Implement reduction to study parallel reduction patterns.
-- Later, compare against cuBLAS.
 

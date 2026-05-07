@@ -96,7 +96,7 @@ Included benchmarks:
 - Shared-memory bank conflict
 - Register pressure
 
-Representative reports are in `cuda-profiling/docs/`, and selected CSV/PNG outputs are in `cuda-profiling/results/`.
+Representative reports are in `cuda-profiling/docs/`, and selected CSV outputs are in `cuda-profiling/results/`.
 
 ## Key Takeaway
 

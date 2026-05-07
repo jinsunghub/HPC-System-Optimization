@@ -2,9 +2,7 @@
 
 ## Run
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
-- Result: `results/memory_access_pattern_20260504_020135.csv`
 - Input size: 16,777,216 floats
 - Kernel repeat: 30
 - Block size: 256
@@ -55,8 +53,4 @@ When Nsight Compute is available, this experiment should be profiled with metric
 - L2 cache hit rate
 - DRAM throughput
 - warp stall reasons related to memory dependency
-
-## Short explanation
-
-I built a CUDA memory access benchmark that keeps the same number of loads and stores but changes whether adjacent threads read adjacent memory. The coalesced version reached about 48 GB/s, while a high-stride permutation dropped to about 8 GB/s. Occupancy remained 1.00 across the sweep, so the result shows that occupancy alone is not enough. Global memory coalescing and memory transaction efficiency can dominate kernel performance.
 

@@ -2,7 +2,6 @@
 
 ## Run
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
 - Result CSV: `results/cuda_graphs_20260504_222016.csv`
 - Plot: `results/cuda_graphs_20260504_222016.png`
@@ -58,8 +57,4 @@ Each workload compares normal CUDA launch against CUDA Graph replay. The key met
 - In the copy-kernel-copy workload, transfer cost and driver queue behavior dominate more strongly. CUDA Graphs did not consistently improve end-to-end time there.
 
 The practical takeaway is that CUDA Graphs are most useful when the application repeatedly submits the same small GPU work graph. They reduce CPU launch overhead, but they do not automatically fix transfer-bound workloads.
-
-## Short explanation
-
-I implemented a CUDA Graphs benchmark that compares normal repeated kernel launches with graph capture and replay. For a tiny kernel-only workload of 1,024 floats repeated 1,000 times, CUDA Graph replay reduced per-iteration time from about 16.5 us to 10.1 us, about a 1.6x improvement. As the input size grew, the kernel execution time dominated and the graph advantage mostly disappeared. This shows that CUDA Graphs are mainly a launch-overhead optimization for repeated small GPU workflows, not a replacement for fixing memory transfer bottlenecks.
 

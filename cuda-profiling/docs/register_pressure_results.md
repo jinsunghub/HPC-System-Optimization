@@ -2,7 +2,6 @@
 
 ## Run
 
-- Date: 2026-05-04
 - GPU: NVIDIA GeForce MX450
 - Result CSV: `results/register_pressure_20260504_231245.csv`
 - Plot: `results/register_pressure_20260504_231245.png`
@@ -59,8 +58,4 @@ This is the important lesson: higher occupancy is not automatically higher perfo
 - Lower occupancy becomes a problem when there is not enough parallelism to hide latency.
 - More registers can also expose more instruction-level parallelism, so the best point is workload-dependent.
 - In this experiment, occupancy dropped at high pressure, but throughput did not collapse because the kernel was compute-heavy and had no local-memory spills.
-
-## Short explanation
-
-I implemented a register pressure sweep using templated kernels with different numbers of live per-thread accumulators. The compiler reported register usage increasing from 11 to 128 registers per thread. Occupancy stayed at 100% up to pressure 32, then dropped to 75% and 50% for higher-pressure kernels. Raw runtime increased because the kernels did more work, but normalized throughput stayed roughly flat after pressure 16. This showed that occupancy is useful for diagnosing resource limits, but it is not by itself a performance goal. Lower occupancy can still perform well if the kernel has enough independent arithmetic and avoids spilling.
 

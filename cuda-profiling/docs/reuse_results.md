@@ -2,7 +2,6 @@
 
 ## Environment
 
-- Date: 2026-05-03
 - GPU: NVIDIA GeForce MX450
 - GPU memory: 2048 MiB
 - Driver: 595.97
@@ -81,11 +80,4 @@ GPU speed appears when computation per transfer is high enough.
 ```
 
 This idea is often called arithmetic intensity or data movement amortization.
-
-## Next Experiments
-
-- Compare pageable memory with pinned host memory.
-- Implement naive matrix multiplication.
-- Implement tiled matrix multiplication with shared memory.
-- Profile the reuse benchmark in Nsight Systems.
 

@@ -61,10 +61,9 @@ Selected reports:
 - `docs/reduction_results.md`
 - `docs/stream_overlap_results.md`
 
-Selected CSV and PNG outputs are stored under:
+Selected CSV outputs are stored under:
 
 - `results/selected_csv/`
-- `results/selected_figures/`
 
 ## What I Learned
 

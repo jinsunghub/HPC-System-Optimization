@@ -23,8 +23,3 @@ __pycache__/
 *.qdrep
 *.nsys-rep
 *.sqlite
-
-# Local notes that are not part of the public experiment repo
-*interview*
-*면담*
-sslab_interview_prep_*.md

@@ -137,9 +137,10 @@ This project spans two execution contexts: server-class research-lab profiling a
 
 Research-lab environment:
 
-- CAMe Lab server-class CPU machines, including `came02` and `came04`
-- Server-side matrix multiplication profiling, memory latency measurement, and Intel VTune profiling
-- CPU/memory-system analysis focused on cache hierarchy, NUMA behavior, DTLB overhead, and memory-bound bottlenecks
+- `came02`: T340 E-2288G
+- `came04`: 2 * Intel Xeon Scalable Gold 6530
+- Google Multichase memory latency measurement on `came02` and `came04`, including cache/DRAM latency and NUMA-aware local/remote access experiments
+- CAMe Lab server environment for matrix multiplication and Intel VTune profiling, including AVX-512 and microarchitecture bottleneck analysis
 
 Reproducible notebook/local environment:
 

@@ -1,14 +1,27 @@
-﻿# HPC-System-Optimization
+# HPC-System-Optimization
 
 Hands-on experiments for understanding CPU/GPU performance bottlenecks in AI and HPC workloads.
 
-This repository focuses on small, explainable experiments rather than high-level library benchmarking. The main goal is to study how memory hierarchy, data movement, thread scheduling, and vectorization affect the performance of common AI/HPC kernels such as GEMM, convolution, softmax, and reductions.
+This repository focuses on small, explainable experiments rather than high-level library benchmarking. The main goal is to study how memory hierarchy, data movement, thread scheduling, and vectorization affect common AI/HPC kernels such as GEMM, convolution, softmax, matrix multiplication, and reductions.
+
+## Measured Results
+
+| Area | Experiment | Optimization / Analysis | Result |
+|---|---|---|---|
+| CUDA | Matrix multiplication | Shared memory tiled kernel | For `1024 x 1024`, kernel time improved from `58.00 ms` to `29.16 ms` (`1.99x` speedup) |
+| CUDA | Matrix multiplication | End-to-end tiled execution including H2D/D2H copies | For `1024 x 1024`, total time improved from `71.88 ms` to `42.53 ms` (`1.69x` speedup) |
+| CUDA | Tile size sweep | Compared tile sizes 8, 16, and 32 | Tile 32 reached `316.88 GFLOP/s` on the tested MX450 setup |
+| CUDA | Stream overlap | Pinned memory + 4 CUDA streams | Total time improved from `53.76 ms` to `27.64 ms` |
+| CPU | Matrix multiplication | B-matrix transpose + AVX2/FMA vectorization | Verified cache-locality and SIMD vectorization effects |
+| OpenMP | Softmax regression | Static vs dynamic scheduling and reduction | Analyzed load imbalance, scheduling overhead, and race-free parallel reduction |
+
+Detailed reports are available in `docs/` and `cuda-profiling/docs/`.
 
 ## Project Overview
 
 | File / Directory | Topic | Main Ideas |
 |---|---|---|
-| `GEMM_Convolution_Optimization.ipynb` | CUDA GEMM and convolution | Shared memory tiling, coalesced global memory access, constant memory |
+| `GEMM_Convolution_Optimization.ipynb` | CUDA GEMM and convolution | Shared memory tiling, coalesced global-memory access, constant memory |
 | `Softmax_Regression_Dynamic_Scheduling.ipynb` | OpenMP scheduling | Static vs dynamic scheduling, load imbalance, reduction |
 | `Matrix_Multiplication_AVX.ipynb` | CPU matrix multiplication | Cache locality, B-matrix transpose, AVX2/FMA vectorization |
 | `BigInt_Multiplication_Multithread.ipynb` | CPU multithreading | Independent work partitioning and thread-level parallelism |
@@ -97,6 +110,12 @@ Included benchmarks:
 - Register pressure
 
 Representative reports are in `cuda-profiling/docs/`, and selected CSV outputs are in `cuda-profiling/results/`.
+
+## Research Background
+
+This project extends the foundation I built as an undergraduate researcher at CAMe Lab. Through matrix multiplication profiling, memory latency measurement, and Intel VTune profiling, I studied cache hierarchy, NUMA behavior, DTLB overhead, memory-bound bottlenecks, and CPU-level performance analysis.
+
+Based on that foundation, this repository focuses on implementation-level experiments using CUDA, OpenMP, and AVX2/FMA. The repository separates the portfolio project results from the research-lab background: lab work explains the architectural basis, while this repository shows reproducible code experiments and measured optimization results.
 
 ## Key Takeaway
 

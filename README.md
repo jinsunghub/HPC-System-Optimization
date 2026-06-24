@@ -6,19 +6,19 @@ This repository focuses on small, explainable experiments rather than high-level
 
 ## Measured Results
 
-| Area | Experiment | Optimization / Analysis | Result |
-|---|---|---|---|
-| Server CPU | Matrix multiplication profiling | Loop reordering, loop blocking, SIMD/AVX-512 | Combined optimization reached about `13.2x` speedup in CAMe Lab profiling |
-| Server memory | Memory latency measurement | Cache/DRAM latency and NUMA behavior analysis | Measured L1/L2/LLC/DRAM latency patterns and local/remote memory behavior |
-| Server CPU | Intel VTune profiling | Microarchitecture bottleneck analysis | Analyzed Retiring, Back-End Bound, Memory Bound, Core Bound, and DTLB overhead |
-| CUDA | Matrix multiplication | Shared memory tiled kernel | For `1024 x 1024`, kernel time improved from `58.00 ms` to `29.16 ms` (`1.99x` speedup) |
-| CUDA | Matrix multiplication | End-to-end tiled execution including H2D/D2H copies | For `1024 x 1024`, total time improved from `71.88 ms` to `42.53 ms` (`1.69x` speedup) |
-| CUDA | Tile size sweep | Compared tile sizes 8, 16, and 32 | Tile 32 reached `316.88 GFLOP/s` on the tested MX450 setup |
-| CUDA | Stream overlap | Pinned memory + 4 CUDA streams | Total time improved from `53.76 ms` to `27.64 ms` |
-| CPU | Matrix multiplication | B-matrix transpose + AVX2/FMA vectorization | Verified cache-locality and SIMD vectorization effects |
-| OpenMP | Softmax regression | Static vs dynamic scheduling and reduction | Analyzed load imbalance, scheduling overhead, and race-free parallel reduction |
+| Area | Experiment | Optimization / Analysis | Result | Source |
+|---|---|---|---|---|
+| Server CPU | Matrix multiplication profiling | Loop reordering, loop blocking, SIMD/AVX-512 | Combined optimization reached about `13.2x` speedup in CAMe Lab profiling | [`docs/server_profiling.md`](docs/server_profiling.md) |
+| Server memory | Memory latency measurement | Cache/DRAM latency and NUMA behavior analysis | Measured L1/L2/LLC/DRAM latency patterns and local/remote memory behavior | [`docs/server_profiling.md`](docs/server_profiling.md) |
+| Server CPU | Intel VTune profiling | Microarchitecture bottleneck analysis | Analyzed Retiring, Back-End Bound, Memory Bound, Core Bound, and DTLB overhead | [`docs/server_profiling.md`](docs/server_profiling.md) |
+| CUDA | Matrix multiplication | Shared memory tiled kernel | For `1024 x 1024`, kernel time improved from `58.00 ms` to `29.16 ms` (`1.99x` speedup) | [`cuda-profiling/docs/matmul_tiled_results.md`](cuda-profiling/docs/matmul_tiled_results.md) |
+| CUDA | Matrix multiplication | End-to-end tiled execution including H2D/D2H copies | For `1024 x 1024`, total time improved from `71.88 ms` to `42.53 ms` (`1.69x` speedup) | [`cuda-profiling/docs/matmul_tiled_results.md`](cuda-profiling/docs/matmul_tiled_results.md) |
+| CUDA | Tile size sweep | Compared tile sizes 8, 16, and 32 | Tile 32 reached `316.88 GFLOP/s` on the tested MX450 setup | [`cuda-profiling/docs/block_tile_sweep_results.md`](cuda-profiling/docs/block_tile_sweep_results.md) |
+| CUDA | Stream overlap | Pinned memory + 4 CUDA streams | Total time improved from `53.76 ms` to `27.64 ms` | [`docs/experiment_summary.md`](docs/experiment_summary.md) |
+| CPU | Matrix multiplication | B-matrix transpose + AVX2/FMA vectorization | Verified cache-locality and SIMD vectorization effects | [`Matrix_Multiplication_AVX.ipynb`](Matrix_Multiplication_AVX.ipynb) |
+| OpenMP | Softmax regression | Static vs dynamic scheduling and reduction | Analyzed load imbalance, scheduling overhead, and race-free parallel reduction | [`Softmax_Regression_Dynamic_Scheduling.ipynb`](Softmax_Regression_Dynamic_Scheduling.ipynb) |
 
-Detailed repository reports are available in `docs/` and `cuda-profiling/docs/`. The server-side CPU and memory profiling work was conducted as CAMe Lab research documentation and is used here as the architectural basis for the repository experiments.
+Detailed reports are available in [`docs/server_profiling.md`](docs/server_profiling.md), [`docs/experiment_summary.md`](docs/experiment_summary.md), and `cuda-profiling/docs/`. The server-side CPU and memory profiling work was conducted as CAMe Lab research documentation and is used here as the architectural basis for the repository experiments.
 
 ## Project Overview
 
